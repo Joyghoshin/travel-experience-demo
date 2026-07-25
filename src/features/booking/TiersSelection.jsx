@@ -1,135 +1,85 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useBooking } from '../../context/BookingContext';
+import Button from '../../components/ui/Button';
+import Card from '../../components/ui/Card';
 
-const CheckoutView = ({ bookingDetails, onBack, onSuccess }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    cardNumber: '4242 •••• •••• 4242',
-    exp: '12/28',
-    cvc: '321',
-    zip: '56001'
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSuccess(formData);
-  };
+export default function TiersSelection() {
+  const {
+    selectedExperience,
+    adults,
+    childrenCount,
+    basePrice,
+    totalPrice,
+    setAdults,
+    setChildrenCount,
+    goToCatalog,
+    goToSlots,
+  } = useBooking();
 
   return (
-    <div className="max-w-xl mx-auto p-6 font-sans bg-white rounded-2xl shadow-sm border border-slate-200">
-      <div className="flex items-center justify-between mb-6">
-        <button 
-          onClick={onBack}
-          className="text-xs font-semibold text-slate-500 hover:text-slate-800 transition-colors"
-        >
-          ← Back to Tiers
-        </button>
-        <h3 className="text-lg font-bold text-slate-900">Secure Checkout</h3>
-        <span className="text-xs font-medium bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full">Step 3/3</span>
+    <Card className="max-w-xl mx-auto p-8">
+      <span className="text-[11px] font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">STEP 1 OF 3</span>
+      <h2 className="text-xl font-extrabold text-slate-900 mt-3 mb-1">Select Visitors &amp; Tiers</h2>
+      <p className="text-sm text-slate-500 mb-6">{selectedExperience?.title}</p>
+
+      {/* Adult Counter */}
+      <div className="flex items-center justify-between py-4 border-b border-slate-100">
+        <div>
+          <div className="font-semibold text-sm text-slate-900">Adult Ticket</div>
+          <div className="text-xs text-slate-500">Ages 13+ • ${basePrice} each</div>
+        </div>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setAdults(Math.max(1, adults - 1))}
+            className="w-8 h-8 rounded-lg border border-slate-300 font-bold"
+          >
+            -
+          </button>
+          <span className="w-5 text-center font-bold">{adults}</span>
+          <button
+            onClick={() => setAdults(adults + 1)}
+            className="w-8 h-8 rounded-lg border border-slate-300 font-bold"
+          >
+            +
+          </button>
+        </div>
       </div>
 
-      {/* Express Checkout Mock */}
-      <div className="mb-6 p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
-        <span className="text-xs text-slate-500 block mb-2 font-medium uppercase tracking-wider">Express Checkout</span>
-        <button 
-          type="button"
-          onClick={() => onSuccess(formData)}
-          className="w-full bg-slate-900 hover:bg-slate-800 text-white py-3 rounded-xl font-medium text-sm transition-colors flex items-center justify-center space-x-2"
-        >
-          <span> Pay / Google Pay Instant Checkout</span>
-        </button>
-        <div className="relative flex py-3 items-center">
-          <div className="flex-grow border-t border-slate-200"></div>
-          <span className="flex-shrink mx-4 text-xs text-slate-400">or pay with card</span>
-          <div className="flex-grow border-t border-slate-200"></div>
+      {/* Child Counter */}
+      <div className="flex items-center justify-between py-4 border-b border-slate-100">
+        <div>
+          <div className="font-semibold text-sm text-slate-900">Child Ticket</div>
+          <div className="text-xs text-slate-500">Ages 3-12 • ${Math.round(basePrice * 0.6)} each</div>
+        </div>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setChildrenCount(Math.max(0, childrenCount - 1))}
+            className="w-8 h-8 rounded-lg border border-slate-300 font-bold"
+          >
+            -
+          </button>
+          <span className="w-5 text-center font-bold">{childrenCount}</span>
+          <button
+            onClick={() => setChildrenCount(childrenCount + 1)}
+            className="w-8 h-8 rounded-lg border border-slate-300 font-bold"
+          >
+            +
+          </button>
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="flex items-center justify-between mt-6">
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
-          <input 
-            type="text" 
-            name="name"
-            required
-            placeholder="John Doe"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
-          />
+          <span className="block text-xs text-slate-500">Total Amount</span>
+          <span className="text-xl font-extrabold text-slate-900">${totalPrice}</span>
         </div>
-
-        <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">Email Address (for instant ticket)</label>
-          <input 
-            type="email" 
-            name="email"
-            required
-            placeholder="john.doe@example.com"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full p-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
-          />
+        <div className="flex gap-3">
+          <Button variant="ghost" onClick={goToCatalog}>
+            ← Back
+          </Button>
+          <Button onClick={goToSlots}>Select Date &amp; Time →</Button>
         </div>
-
-        <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">Card Number</label>
-          <input 
-            type="text" 
-            name="cardNumber"
-            value={formData.cardNumber}
-            onChange={handleChange}
-            className="w-full p-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
-          />
-        </div>
-
-        <div className="grid grid-cols-3 gap-3">
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">MM/YY</label>
-            <input 
-              type="text" 
-              name="exp"
-              value={formData.exp}
-              onChange={handleChange}
-              className="w-full p-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">CVC</label>
-            <input 
-              type="text" 
-              name="cvc"
-              value={formData.cvc}
-              onChange={handleChange}
-              className="w-full p-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Zip Code</label>
-            <input 
-              type="text" 
-              name="zip"
-              value={formData.zip}
-              onChange={handleChange}
-              className="w-full p-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
-            />
-          </div>
-        </div>
-
-        <button 
-          type="submit"
-          className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-3.5 rounded-xl font-medium text-sm transition-colors shadow-sm mt-6"
-        >
-          Confirm & Pay ${bookingDetails?.total || 56}
-        </button>
-        <p className="text-center text-xs text-slate-400 mt-2">🛡️ 256-bit Secure Encryption • Free Cancellation</p>
-      </form>
-    </div>
+      </div>
+    </Card>
   );
-};
-
-export default CheckoutView;
+}

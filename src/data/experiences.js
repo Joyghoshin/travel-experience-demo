@@ -1,5 +1,11 @@
 import museumImg from '../assets/museum-bg.png'; // Update filename if yours is different
 
+// Images for the 7 new experiences use Picsum's seeded placeholder service
+// (https://picsum.photos) — stable, no API key needed, real photographic
+// images, but not exact thematic matches (e.g. not an actual kayaking photo).
+// Swap any of these for real photos whenever you have them; just replace the
+// `image` value with a local import the same way museumImg is used above.
+
 export const experiences = [
   {
     id: "museum-rooftop-walk",
@@ -9,7 +15,131 @@ export const experiences = [
     location: "Cultural District, Main Wing",
     description: "Explore centuries of history with skip-the-line access and an exclusive guide.",
     price: 38,
+    basePrice: 38,
     image: museumImg,
-    featured: true
-  }
+    featured: true,
+    availableSlots: [
+      { id: 'slot-0900', time: '09:00 AM', category: 'Morning', available: true },
+      { id: 'slot-1100', time: '11:00 AM', category: 'Morning', available: true },
+      { id: 'slot-1300', time: '01:00 PM', category: 'Afternoon', available: false },
+      { id: 'slot-1500', time: '03:00 PM', category: 'Afternoon', available: true },
+      { id: 'slot-1700', time: '05:00 PM', category: 'Evening', available: true },
+      { id: 'slot-1900', time: '07:00 PM', category: 'Evening', available: false },
+    ],
+  },
+  {
+    id: "sunrise-kayak-adventure",
+    title: "Sunrise Kayak Adventure on the Bay",
+    category: "Outdoor Adventure",
+    duration: "3 Hours",
+    location: "Harbor Point Marina",
+    description: "Paddle out as the sun rises over calm waters, with a certified guide and all gear included.",
+    price: 55,
+    basePrice: 55,
+    image: "https://picsum.photos/seed/sunrise-kayak/900/600",
+    featured: false,
+    availableSlots: [
+      { id: 'slot-0600', time: '06:00 AM', category: 'Sunrise', available: true },
+      { id: 'slot-0730', time: '07:30 AM', category: 'Morning', available: true },
+      { id: 'slot-0900', time: '09:00 AM', category: 'Morning', available: false },
+    ],
+  },
+  {
+    id: "hot-air-balloon-sunrise",
+    title: "Hot Air Balloon Sunrise Flight",
+    category: "Scenic Flight",
+    duration: "1.5 Hours",
+    location: "Valley Launch Field",
+    description: "Float silently above rolling hills at dawn, champagne toast included on landing.",
+    price: 145,
+    basePrice: 145,
+    image: "https://picsum.photos/seed/hot-air-balloon/900/600",
+    featured: true,
+    availableSlots: [
+      { id: 'slot-0530', time: '05:30 AM', category: 'Sunrise', available: true },
+      { id: 'slot-0600', time: '06:00 AM', category: 'Sunrise', available: false },
+    ],
+  },
+  {
+    id: "old-town-food-walk",
+    title: "Old Town Food & Wine Walking Tour",
+    category: "Food & Drink",
+    duration: "3 Hours",
+    location: "Old Town Market Square",
+    description: "Taste your way through six family-run eateries with a local food historian.",
+    price: 68,
+    basePrice: 68,
+    image: "https://picsum.photos/seed/food-wine-walk/900/600",
+    featured: false,
+    availableSlots: [
+      { id: 'slot-1100', time: '11:00 AM', category: 'Midday', available: true },
+      { id: 'slot-1600', time: '04:00 PM', category: 'Evening', available: true },
+      { id: 'slot-1830', time: '06:30 PM', category: 'Evening', available: true },
+    ],
+  },
+  {
+    id: "hands-on-cooking-class",
+    title: "Hands-On Regional Cooking Class",
+    category: "Culinary Workshop",
+    duration: "2.5 Hours",
+    location: "Downtown Culinary Studio",
+    description: "Learn to cook three signature dishes from a local chef, then sit down to enjoy them.",
+    price: 72,
+    basePrice: 72,
+    image: "https://picsum.photos/seed/cooking-class/900/600",
+    featured: false,
+    availableSlots: [
+      { id: 'slot-1000', time: '10:00 AM', category: 'Morning', available: true },
+      { id: 'slot-1400', time: '02:00 PM', category: 'Afternoon', available: true },
+      { id: 'slot-1800', time: '06:00 PM', category: 'Evening', available: false },
+    ],
+  },
+  {
+    id: "mountain-ridge-hike",
+    title: "Mountain Ridge Guided Hiking Trek",
+    category: "Hiking",
+    duration: "5 Hours",
+    location: "North Ridge Trailhead",
+    description: "A guided trek to panoramic viewpoints, suited for moderately fit hikers.",
+    price: 49,
+    basePrice: 49,
+    image: "https://picsum.photos/seed/mountain-ridge-hike/900/600",
+    featured: false,
+    availableSlots: [
+      { id: 'slot-0700', time: '07:00 AM', category: 'Morning', available: true },
+      { id: 'slot-0900', time: '09:00 AM', category: 'Morning', available: true },
+    ],
+  },
+  {
+    id: "wildlife-safari-reserve",
+    title: "Wildlife Safari at the Nature Reserve",
+    category: "Wildlife",
+    duration: "4 Hours",
+    location: "Eastern Nature Reserve",
+    description: "Open-vehicle safari with a naturalist guide, best chance of spotting native wildlife.",
+    price: 95,
+    basePrice: 95,
+    image: "https://picsum.photos/seed/wildlife-safari/900/600",
+    featured: true,
+    availableSlots: [
+      { id: 'slot-0600', time: '06:00 AM', category: 'Sunrise', available: true },
+      { id: 'slot-1600', time: '04:00 PM', category: 'Evening', available: true },
+    ],
+  },
+  {
+    id: "sunset-sailing-cruise",
+    title: "Sunset Sailing Cruise & Appetizers",
+    category: "Sailing",
+    duration: "2 Hours",
+    location: "Marina Pier 7",
+    description: "Sail into the sunset aboard a classic sloop, with light bites and drinks on board.",
+    price: 62,
+    basePrice: 62,
+    image: "https://picsum.photos/seed/sunset-sailing/900/600",
+    featured: false,
+    availableSlots: [
+      { id: 'slot-1730', time: '05:30 PM', category: 'Evening', available: true },
+      { id: 'slot-1900', time: '07:00 PM', category: 'Evening', available: true },
+    ],
+  },
 ];
