@@ -18,7 +18,7 @@ export default function CatalogView({ onSelectExperience }) {
           <span className="text-[11px] font-bold tracking-wider text-slate-500 bg-slate-100 px-2 py-1 rounded">
             PRODUCT DEMO PORTFOLIO
           </span>
-          <h2 className="text-lg font-extrabold text-slate-900 mt-2">Travel &amp; Experience Booking Flow</h2>
+          <h2 className="text-2xl font-extrabold text-slate-900 mt-2">Travel &amp; Experience Booking Flow</h2>
         </div>
         <span className="text-xs font-medium text-slate-600 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-full">
           Live Interactive Prototype

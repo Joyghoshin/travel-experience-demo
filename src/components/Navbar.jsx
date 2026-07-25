@@ -14,7 +14,7 @@ export default function Navbar() {
 
   return (
     <nav className="max-w-3xl mx-auto px-4 pt-6 flex items-center justify-between">
-      <span className="font-bold text-slate-900 text-sm">🧭 Travel &amp; Experience Booking</span>
+      <span className="font-bold text-slate-900 text-lg">🧭 Travel &amp; Experience Booking</span>
       {activeIndex >= 0 && (
         <div className="hidden sm:flex items-center gap-2 text-xs text-slate-500">
           {STEPS.map((s, i) => (
